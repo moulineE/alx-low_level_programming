@@ -18,7 +18,7 @@ int main(void)
 
 	n = 0;
 
-	while(n < 10)
+	while (n < 10)
 	{
 		putchar('0' + n);
 		n = n + 1;
