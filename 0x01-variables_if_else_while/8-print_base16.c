@@ -6,7 +6,7 @@
  *
  * declare variable n and i, assign 0 to n and 48 to i
  *
- * while structure with putchar to prints all the numbers of base 16 in lowercase
+ * while structur with putchar to print all the nubrs of base 16 in lowercase
  *
  * if, else structure to exclude ascii character 58 to 96
  *
