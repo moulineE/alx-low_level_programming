@@ -7,16 +7,12 @@
  */
 int _isupper(int c)
 {
-	int i;
-
-	if (c <= 90)
+	if (c >= 'A' && c <= 'Z')
 	{
-		i = 1;
+		return (1);
 	}
-	else if (c >= 97)
+	else
 	{
-		i = 0;
+		return (0);
 	}
-
-	return (i);
 }
