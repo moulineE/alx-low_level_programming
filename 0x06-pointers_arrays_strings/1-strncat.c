@@ -5,6 +5,7 @@
  * src does not need to be null-terminated if it contains n or more bytes
  * @dest: the destionation to concatenates
  * @src: the string to copy
+ * @n: number of byte of srv
  *
  * Return: dest
  */
