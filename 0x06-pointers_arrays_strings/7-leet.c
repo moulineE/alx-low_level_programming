@@ -16,7 +16,7 @@ char *leet(char *s)
 	{
 		for (m = 0; m < 5; m++)
 		{
-			if (s[i] == b[m] || s[i] == (b[m] -32))
+			if (s[i] == b[m] || s[i] == (b[m] - 32))
 			{
 				s[i] = c[m];
 			}
