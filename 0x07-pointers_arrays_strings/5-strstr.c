@@ -1,4 +1,12 @@
 #include "main.h"
+/**
+ * *_strstr - unction finds the first occurrence of the substring needle
+ * @haystack: the string to search in
+ * @needle: the substring to searchh for
+ *
+ * Return a pointer to the beginning of the substring 
+ * or 0 if there are ont any occurence
+ */
 char *_strstr(char *haystack, char *needle)
 {
 	int i;
@@ -13,7 +21,7 @@ char *_strstr(char *haystack, char *needle)
 	}
 	for (i = 0; haystack[i] > 0; i++)
 	{
-		if (haystack[i] == needle[m] && (haystack[i + 1] == needle[m + 1] || needle[m + 1] == 0))
+		if (haystack[i] == needle[m])
 		{
 			while (needle[m] > 0)
 			{
