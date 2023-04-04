@@ -4,7 +4,7 @@
  * @haystack: the string to search in
  * @needle: the substring to searchh for
  *
- * Return a pointer to the beginning of the substring 
+ * Return: a pointer to the beginning of the substring
  * or 0 if there are ont any occurence
  */
 char *_strstr(char *haystack, char *needle)
@@ -13,7 +13,7 @@ char *_strstr(char *haystack, char *needle)
 	int m;
 	int c;
 	int tflag;
-	
+
 	tflag = 0;
 	m = 0;
 	for (c = 0; needle[c] > 0; c++)
@@ -21,7 +21,8 @@ char *_strstr(char *haystack, char *needle)
 	}
 	for (i = 0; haystack[i] > 0; i++)
 	{
-		if (haystack[i] == needle[m])
+		if (haystack[i] == needle[m]
+				&& (haystack[i + 1] == needle[m + 1] || needle[m + 1] == 0))
 		{
 			while (needle[m] > 0)
 			{
