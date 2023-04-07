@@ -5,7 +5,6 @@ int stringlent(char *a, int i);
 /**
  * is_palindrome - function that returns 1 if string is a palindrome & 0 if not
  * @s: the string to check
- * @r: the result of the check
  *
  * Return: 1 is palindrom, 0 if not
  */
