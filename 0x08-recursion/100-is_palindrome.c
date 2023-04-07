@@ -1,10 +1,11 @@
 #include "main.h"
 
-int secondaryfonc(char *n, int i, int b);
+int secondaryfonc(char *n, int i, int b, int r);
 int stringlent(char *a, int i);
 /**
  * is_palindrome - function that returns 1 if string is a palindrome & 0 if not
  * @s: the string to check
+ * @r: the result of the check
  *
  * Return: 1 is palindrom, 0 if not
  */
@@ -14,14 +15,7 @@ int is_palindrome(char *s)
 	int r;
 
 	c = stringlent(s, 0);
-	if (secondaryfonc(s, c, 0) > 1)
-	{
-		r = 1;
-	}
-	if (secondaryfonc(s, c, 0) <= 1)
-	{
-		r = 0;
-	}
+	r = (secondaryfonc(s, c - 1, 0, 1));
 	return (r);
 }
 /**
@@ -29,23 +23,24 @@ int is_palindrome(char *s)
  * @n: the strig to check
  * @i: the count of char of the string a
  * @b: the inisialisation of the array
+ * @r: the result of the check
  *
  * Return: r
  */
-int secondaryfonc(char *n, int i, int b)
+int secondaryfonc(char *n, int i, int b, int r)
 {
-	int r;
 
-	if (n[b] > 0)
+	if (i >= 0)
 	{
-		if (n[b] == n[i - 1])
+		if (n[b] == n[i])
 		{
-			r = 1 + (secondaryfonc(n, i - 1, b + 1));
+			r = r * 1;
 		}
-		if (n[b] != n[i - 1])
+		if (n[b] != n[i])
 		{
-			r = 0;
+			r = r * 0;
 		}
+		r = r * (secondaryfonc(n, i - 1, b + 1, r));
 	}
 	return (r);
 }
