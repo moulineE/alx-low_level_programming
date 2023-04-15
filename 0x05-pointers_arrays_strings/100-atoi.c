@@ -2,18 +2,26 @@
 
 int _pow_recursion(int x, int y);
 
+/**
+ * _atoi - function that convert a string to an integer.
+ * @s: the char to convert
+ *
+ * Return: r
+ */
 int _atoi(char *s)
 {
 	int negf = 0;
 	int i;
 	int n = 0;
 	int r = 0;
+	int df = 0;
 
-	for (i = 0; s[i] > 0; i++)
+	for (i = 0; (s[i] > 0 && ((s[i] >= 48 && s[i] <= 57) || df == 0)); i++)
 	{
 		if (s[i] >= 48 && s[i] <= 57)
 		{
 			n++;
+			df++;
 		}
 	}
 	for (i = 0; s[i] < 48; i++)
@@ -23,7 +31,7 @@ int _atoi(char *s)
 			negf++;
 		}
 	}
-	for (i = 0; s[i] > 0; i++)
+	for (i = 0; (s[i] > 0); i++)
 	{
 		if (s[i] >= 48 && s[i] <= 57)
 		{
@@ -49,7 +57,7 @@ int _pow_recursion(int x, int y)
 {
 	if (y < 0)
 	{
-		return (-1);
+		return (0);
 	}
 	if (y == 0)
 	{
