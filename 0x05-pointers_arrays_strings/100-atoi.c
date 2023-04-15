@@ -35,11 +35,11 @@ int _atoi(char *s)
 	{
 		if (s[i] >= 48 && s[i] <= 57)
 		{
-			r = r + ((s[i] - 48) * _pow_recursion(10, n - 1));
+			r = r - ((s[i] - 48) * _pow_recursion(10, n - 1));
 			n--;
 		}
 	}
-	if (negf % 2 != 0)
+	if (negf % 2 == 0)
 	{
 		r = r * -1;
 	}
