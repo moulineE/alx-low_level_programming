@@ -6,41 +6,45 @@
  * print_all - function that prints anything.
  * @format: is a list of types of arguments passed to the function
  */
-void print_all(const char * const format, ...);
+void print_all(const char * const format, ...)
 {
 	va_list ap;
-	unsigned int i;
+	int i;
 	char *str;
-	char separator = "";
+	char *separator = "";
 
 	va_start(ap, format);
-	if (format > 0)
+	if (format != NULL)
 	{
-		for (i = 0; format[i] > 0; i++)
+		while (format[i] > 0)
 		{
 			switch (format[i])
 			{
 				case 'c':
-					printf("%s%c,", separator va_arg(ap, int));
+					printf("%s%c", separator, va_arg(ap, int));
 					break;
 				case 'i':
-					printf("%s%d,", separator va_arg(ap, int));
+					printf("%s%d", separator, va_arg(ap, int));
 					break;
 				case 'f':
-					printf("%s%f,", separator va_arg(ap, double));
+					printf("%s%f", separator, va_arg(ap, double));
 					break;
 				case 's':
 					str = va_arg(ap, char*);
-					if (str != NULL)
+					if (str == NULL)
 					{
 						str = "(nil)";
 					}
-					printf("%s%s,", separator str);
+					printf("%s%s", separator, str);
 					break;
+				default:
+					i++;
+					continue;
 			}
 			separator = ", ";
 			i++;
 		}
 	printf("\n");
 	va_end(ap);
+	}
 }
