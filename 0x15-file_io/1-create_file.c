@@ -11,7 +11,7 @@ int _strlen(char *s);
  */
 int create_file(const char *filename, char *text_content)
 {
-	int tc_len, w_count, fd;
+	int tc_len = 0, w_count, fd;
 	mode_t permi;
 
 	if (filename == NULL)
@@ -38,6 +38,10 @@ int _strlen(char *s)
 {
 	int longi = 0;
 
+	if (s == NULL)
+	{
+		return (0);
+	}
 	while (*s != '\0')
 	{
 		longi++;
