@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 	if (BUFFER == NULL)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		free(BUFFER);
 		exit(99);
 	}
 	file_from = open(argv[1], O_RDONLY);
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
 	if (r_count == -1 || file_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		free(BUFFER);
 		exit(98);
 	}
 	file_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, permi);
@@ -40,6 +42,7 @@ int main(int argc, char *argv[])
 	if (w_count == -1 || file_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		free(BUFFER);
 		exit(99);
 	}
 	free(BUFFER);
