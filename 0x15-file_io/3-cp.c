@@ -31,15 +31,15 @@ int main(int argc, char *argv[])
 	}
 	file_from = open(argv[1], O_RDONLY);
 	r_count = read(file_from, BUFFER, 1024);
-	if (r_count == -1 || file_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		free(BUFFER);
-		exit(98);
-	}
 	file_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, permi);
-	if (r_count > 0)
+	while (r_count > 0)
 	{
+		if (r_count == -1 || file_from == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+			free(BUFFER);
+			exit(98);
+		}
 		w_count = write(file_to, BUFFER, r_count);
 		if (w_count == -1 || file_to == -1)
 		{
@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
 			free(BUFFER);
 			exit(99);
 		}
+		r_count = read(file_from, BUFFER, 1024);
+		file_to = open(argv[2], O_WRONLY | O_APPEND);
 	}
 	free(BUFFER);
 	close_fd(file_from);
