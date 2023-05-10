@@ -7,7 +7,7 @@ void close_fd(int fd);
  * @argc: the nmb of arg
  * @argv: the argument file_from & file_to
  *
- * Return: 0 or -1 if fail
+ * Return: 0
  */
 
 int main(int argc, char *argv[])
@@ -38,12 +38,15 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 	file_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, permi);
-	w_count = write(file_to, BUFFER, r_count);
-	if (w_count == -1 || file_to == -1)
+	if (r_count > 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		free(BUFFER);
-		exit(99);
+		w_count = write(file_to, BUFFER, r_count);
+		if (w_count == -1 || file_to == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			free(BUFFER);
+			exit(99);
+		}
 	}
 	free(BUFFER);
 	close_fd(file_from);
