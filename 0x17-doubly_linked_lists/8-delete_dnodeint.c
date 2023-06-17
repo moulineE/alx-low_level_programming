@@ -74,7 +74,7 @@ dlistint_t *del_dnodeint(dlistint_t **head)
 	}
 	else
 	{
-		current->next->prev = NULL;
+		current->next->prev = current->prev;
 		*head = current->next;
 		free(current);
 		return (*head);
