@@ -100,7 +100,12 @@ dlistint_t *del_dnodeint_end(dlistint_t **head)
 	{
 		current = current->next;
 	}
-	current->prev->next = NULL;
+	if (current->prev != NULL)
+	{
+		current->prev->next = NULL;
+	}
+	else
+		*head = NULL;
 	free(current);
 	return (*head);
 }
