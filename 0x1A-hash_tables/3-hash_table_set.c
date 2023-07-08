@@ -1,7 +1,7 @@
 #include "hash_tables.h"
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value);
-hash_node_t *chaine_node(const char *key, const char *value);
+hash_node_t *chaine_node(char *key, char *value);
 
 /**
  * hash_table_set - function that adds an element to the hash table
@@ -16,20 +16,30 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
 	hash_node_t *current;
+	char *val_copy, *key_copy;
 
-	if (key == NULL || *key == '\0' || ht == NULL || value == NULL ||
-			(strdup(value) == NULL))
+	if (key == NULL || *key == '\0' || ht == NULL || value == NULL)
 	{
+		return (0);
+	}
+	val_copy = strdup(value);
+	key_copy = strdup(key);
+	if (val_copy == NULL || key_copy == NULL)
+	{
+		free(val_copy);
+		free(key_copy);
 		return (0);
 	}
 	index = key_index((const unsigned char *) key, ht->size);
 	current = (ht->array[index]);
 	if (ht->array[index] == NULL)
 	{
-		ht->array[index] = chaine_node(key, value);
+		ht->array[index] = chaine_node(key_copy, val_copy);
 		if (ht->array[index] == NULL)
 		{
 			free(ht->array[index]);
+			free(val_copy);
+			free(key_copy);
 			return (0);
 		}
 		return (1);
@@ -47,9 +57,14 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 			}
 			if (current->next == NULL)
 			{
-				current->next = chaine_node(key, value);
+				current->next = chaine_node(key_copy, val_copy);
 				if (current->next == NULL)
+				{
+					free(current->next);
+					free(val_copy);
+					free(key_copy);
 					return (0);
+				}
 				return (1);
 			}
 			current = current->next;
@@ -66,7 +81,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
  * Return: a pointer to the new node
  */
 
-hash_node_t *chaine_node(const char *key, const char *value)
+hash_node_t *chaine_node(char *key, char *value)
 {
 	hash_node_t *new;
 
@@ -76,8 +91,8 @@ hash_node_t *chaine_node(const char *key, const char *value)
 		free(new);
 		return (NULL);
 	}
-	new->key = strdup(key);
-	new->value = strdup(value);
+	new->key = key;
+	new->value = value;
 	new->next = NULL;
 	return (new);
 }
