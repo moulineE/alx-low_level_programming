@@ -89,6 +89,8 @@ hash_node_t *chaine_node(char *key, char *value)
 	if (new == NULL)
 	{
 		free(new);
+		free(value);
+		free(key);
 		return (NULL);
 	}
 	new->key = key;
