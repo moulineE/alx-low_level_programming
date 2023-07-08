@@ -52,7 +52,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 			if (strcmp(current->key, key) == 0)
 			{
 				free(current->value);
-				current->value = strdup(value);
+				current->value = val_copy;
+				free(key_copy);
 				return (1);
 			}
 			if (current->next == NULL)
