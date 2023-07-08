@@ -15,7 +15,7 @@ hash_node_t *chaine_node(char *key, char *value);
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
-	hash_node_t *current;
+	hash_node_t *current, *new;
 	char *val_copy, *key_copy;
 
 	if (key == NULL || *key == '\0' || ht == NULL || value == NULL)
@@ -57,14 +57,17 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 			}
 			if (current->next == NULL)
 			{
-				current->next = chaine_node(key_copy, val_copy);
-				if (current->next == NULL)
+				new = chaine_node(key_copy, val_copy);
+				if (new == NULL)
 				{
 					free(current->next);
 					free(val_copy);
 					free(key_copy);
+					free(new);
 					return (0);
 				}
+				new->next = ht->array[index];
+				ht->array[index] = new;
 				return (1);
 			}
 			current = current->next;
